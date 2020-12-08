@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">F1</string>
+    <string-array name="driver">
+        <item>HAMILTON</item>
+        <item>BOTTAS</item>
+        <item>VERSTAPPEN</item>
+        <item>NORRIS</item>
+        <item>ALBON</item>
+        <item>RICCIARDO</item>
+        <item>LECLERC</item>
+        <item>STROLL</item>
+        <item>PEREZ</item>
+        <item>GASLY</item>
+        <item>SAINZ</item>
+        <item>OCON</item>
+        <item>VETTEL</item>
+        <item>KVYAT</item>
+        <item>HÜLKENBERG</item>
+        <item>RÄIKKÖNEN</item>
+        <item>GIOVINAZZI</item>
+        <item>MAGNUSSEN</item>
+        <item>LATIFI</item>
+        <item>RUSSELL</item>
+        <item>GROSJEAN</item>
+    </string-array>
+    <string-array name="driver_numbers">
+        <item>44</item>
+        <item>77</item>
+        <item>33</item>
+        <item>4</item>
+        <item>23</item>
+        <item>3</item>
+        <item>16</item>
+        <item>18</item>
+        <item>11</item>
+        <item>10</item>
+        <item>55</item>
+        <item>31</item>
+        <item>26</item>
+        <item>27</item>
+        <item>7</item>
+        <item>20</item>
+        <item>6</item>
+        <item>63</item>
+        <item>8</item>
+    </string-array>
+</resources>
