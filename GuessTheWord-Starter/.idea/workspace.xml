@@ -6,11 +6,32 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="ScoreViewModel" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a5340d3-d88c-4385-af0d-34847558f00b" name="Default Changelist" comment="" />
+    <list default="true" id="1a5340d3-d88c-4385-af0d-34847558f00b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/game/GameViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/score/ScoreViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/score/ScoreViewModelFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/GuessTheWord-Starter.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/GuessTheWord-Starter.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/game/GameFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/game/GameFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/score/ScoreFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/guesstheword/screens/score/ScoreFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,11 +40,18 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R38MB04WLWN]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -32,7 +60,9 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ProjectId" id="1lSnbPXuACllhgWljdCm4EJtWRZ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -124,21 +154,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="239" key="GridCell.Tab.0.bottom" timestamp="1607599553954">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="399" y="185" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1607618875659">
+      <screen x="0" y="0" width="1333" height="859" />
     </state>
+    <state x="399" y="185" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1333.859@0.0.1333.859" timestamp="1607618875659" />
+    <state width="1291" height="428" key="GridCell.Tab.0.bottom" timestamp="1607618660455">
+      <screen x="0" y="0" width="1333" height="859" />
+    </state>
+    <state width="1291" height="428" key="GridCell.Tab.0.bottom/0.0.1333.859@0.0.1333.859" timestamp="1607618660455" />
     <state width="1877" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553954" />
-    <state width="1877" height="239" key="GridCell.Tab.0.center" timestamp="1607599553953">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1291" height="428" key="GridCell.Tab.0.center" timestamp="1607618660454">
+      <screen x="0" y="0" width="1333" height="859" />
     </state>
+    <state width="1291" height="428" key="GridCell.Tab.0.center/0.0.1333.859@0.0.1333.859" timestamp="1607618660454" />
     <state width="1877" height="239" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
-    <state width="1877" height="239" key="GridCell.Tab.0.left" timestamp="1607599553953">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1291" height="428" key="GridCell.Tab.0.left" timestamp="1607618660454">
+      <screen x="0" y="0" width="1333" height="859" />
     </state>
+    <state width="1291" height="428" key="GridCell.Tab.0.left/0.0.1333.859@0.0.1333.859" timestamp="1607618660454" />
     <state width="1877" height="239" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
-    <state width="1877" height="239" key="GridCell.Tab.0.right" timestamp="1607599553953">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1291" height="428" key="GridCell.Tab.0.right" timestamp="1607618660455">
+      <screen x="0" y="0" width="1333" height="859" />
     </state>
+    <state width="1291" height="428" key="GridCell.Tab.0.right/0.0.1333.859@0.0.1333.859" timestamp="1607618660455" />
     <state width="1877" height="239" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
   </component>
 </project>
