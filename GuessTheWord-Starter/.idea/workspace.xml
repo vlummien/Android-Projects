@@ -6,8 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="ScoreViewModel" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
@@ -158,25 +157,25 @@
       <screen x="0" y="0" width="1333" height="859" />
     </state>
     <state x="399" y="185" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1333.859@0.0.1333.859" timestamp="1607618875659" />
-    <state width="1291" height="428" key="GridCell.Tab.0.bottom" timestamp="1607618660455">
-      <screen x="0" y="0" width="1333" height="859" />
+    <state width="1876" height="687" key="GridCell.Tab.0.bottom" timestamp="1607701833607">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1291" height="428" key="GridCell.Tab.0.bottom/0.0.1333.859@0.0.1333.859" timestamp="1607618660455" />
-    <state width="1877" height="239" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553954" />
-    <state width="1291" height="428" key="GridCell.Tab.0.center" timestamp="1607618660454">
-      <screen x="0" y="0" width="1333" height="859" />
+    <state width="1876" height="687" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607701833607" />
+    <state width="1876" height="687" key="GridCell.Tab.0.center" timestamp="1607701833607">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1291" height="428" key="GridCell.Tab.0.center/0.0.1333.859@0.0.1333.859" timestamp="1607618660454" />
-    <state width="1877" height="239" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
-    <state width="1291" height="428" key="GridCell.Tab.0.left" timestamp="1607618660454">
-      <screen x="0" y="0" width="1333" height="859" />
+    <state width="1876" height="687" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607701833607" />
+    <state width="1876" height="687" key="GridCell.Tab.0.left" timestamp="1607701833607">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1291" height="428" key="GridCell.Tab.0.left/0.0.1333.859@0.0.1333.859" timestamp="1607618660454" />
-    <state width="1877" height="239" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
-    <state width="1291" height="428" key="GridCell.Tab.0.right" timestamp="1607618660455">
-      <screen x="0" y="0" width="1333" height="859" />
+    <state width="1876" height="687" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607701833607" />
+    <state width="1876" height="687" key="GridCell.Tab.0.right" timestamp="1607701833607">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1291" height="428" key="GridCell.Tab.0.right/0.0.1333.859@0.0.1333.859" timestamp="1607618660455" />
-    <state width="1877" height="239" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607599553953" />
+    <state width="1876" height="687" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607701833607" />
   </component>
 </project>
