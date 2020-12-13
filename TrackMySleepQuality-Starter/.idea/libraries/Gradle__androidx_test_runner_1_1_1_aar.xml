@@ -2,8 +2,9 @@
   <library name="Gradle: androidx.test:runner:1.1.1@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b634ab213a42766c6c76a0f0d83098c8/runner-1.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2236ef764b3ebe92c62968a699b1dc0c/runner-1.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2236ef764b3ebe92c62968a699b1dc0c/runner-1.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/decbbdd98cd594bc10c280b614b32c77/runner-1.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2236ef764b3ebe92c62968a699b1dc0c/runner-1.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2236ef764b3ebe92c62968a699b1dc0c/runner-1.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
