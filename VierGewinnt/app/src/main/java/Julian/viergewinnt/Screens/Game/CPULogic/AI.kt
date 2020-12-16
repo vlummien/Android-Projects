@@ -1,5 +1,7 @@
-package Julian.viergewinnt
+package Julian.viergewinnt.Screens.Game.CPULogic
 
+import Julian.viergewinnt.Screens.Game.GameState
+import Julian.viergewinnt.MyApplication
 import android.widget.Button
 import android.widget.Toast
 
@@ -13,7 +15,14 @@ class AI {
             //score 4th token
             for (c in 0..6) {
                 val boardData = boardToData(board)
-                if (GameState.isValidMove(board, c) && GameState.isWIN(placeTokenAt(boardData, c, 2), 2)) {
+                if (GameState.isValidMove(board, c) && GameState.isWIN(
+                        placeTokenAt(
+                            boardData,
+                            c,
+                            2
+                        ), 2
+                    )
+                ) {
                     Toast.makeText(MyApplication.appContext, "Easy", Toast.LENGTH_SHORT).show()
                     return c
                 }
@@ -21,7 +30,14 @@ class AI {
             // if opponent has 3 -> prevent oppononent to score 4
             for (c in 0..6) {
                 val boardData = boardToData(board)
-                if (GameState.isValidMove(board, c) && GameState.isWIN(placeTokenAt(boardData, c, 1), 1)) {
+                if (GameState.isValidMove(board, c) && GameState.isWIN(
+                        placeTokenAt(
+                            boardData,
+                            c,
+                            1
+                        ), 1
+                    )
+                ) {
                     Toast.makeText(MyApplication.appContext, "Easy prevented", Toast.LENGTH_SHORT).show()
                     return c
                 }
@@ -33,11 +49,12 @@ class AI {
                 var possibleMoves = mutableListOf<Int>()
                 for (c in 0..6) {
                     val boardData = boardToData(board)
-                    if ( GameState.isValidMove(board, c)) {
+                    if (GameState.isValidMove(board, c)) {
                         val possibleBoard = placeTokenAt(boardData, c, 2)
                             possibleMoves.add(c)
                             if (GameState.isValidMove(possibleBoard, c) &&
-                                GameState.isWIN(placeTokenAt(possibleBoard, c, 1), 1)) {
+                                GameState.isWIN(placeTokenAt(possibleBoard, c, 1), 1)
+                            ) {
                                 losingMoves.add(c)
                                 possibleMoves.remove(c)
                             }

@@ -1,5 +1,7 @@
 package Julian.viergewinnt
 
+import Julian.viergewinnt.Screens.DifficultySelection
+import Julian.viergewinnt.Screens.Game.Game
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     fun normalVsComputer(view: View) {
         val intent = Intent(MyApplication.appContext, DifficultySelection::class.java).apply {
             putExtra(EXTRA_GAMETYPE, "normal")
+            putExtra(EXTRA_OPPONENT, "cpu")
         }
         startActivity(intent)
     }

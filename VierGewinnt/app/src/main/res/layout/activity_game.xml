@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".Game"
+    tools:context=".Screens.Game.Game"
     tools:deviceIds="wear">
 
 

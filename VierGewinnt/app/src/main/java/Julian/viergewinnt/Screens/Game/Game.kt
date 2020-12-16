@@ -1,5 +1,11 @@
-package Julian.viergewinnt
+package Julian.viergewinnt.Screens.Game
 
+import Julian.viergewinnt.EXTRA_GAMETYPE
+import Julian.viergewinnt.EXTRA_OPPONENT
+import Julian.viergewinnt.MyApplication
+import Julian.viergewinnt.R
+import Julian.viergewinnt.Screens.EXTRA_Difficulty
+import Julian.viergewinnt.Screens.Game.CPULogic.AI
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -13,8 +19,6 @@ import kotlinx.android.synthetic.main.activity_game.*
 
 class Game : AppCompatActivity() {
 
-    lateinit var player1: Player
-    lateinit var player2: Player
     var scoreP1 = 0
     var scoreP2 = 0
     var activePlayer = 2 // 1 = Player1 ; 2 = Player2
