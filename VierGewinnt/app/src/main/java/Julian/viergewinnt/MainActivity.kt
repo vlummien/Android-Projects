@@ -1,11 +1,11 @@
-package Julian.viergewinnt
+package julian.viergewinnt
 
-import Julian.viergewinnt.Screens.DifficultySelection
-import Julian.viergewinnt.Screens.Game.Game
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import julian.viergewinnt.screens.DifficultySelection
+import julian.viergewinnt.screens.game.Game
 
 const val EXTRA_GAMETYPE = "Julian.viergewinnt.GAMETYPE"
 const val EXTRA_OPPONENT = "Julian.viergewinnt.OPPONENT"
@@ -24,10 +24,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun normalVsComputer(view: View) {
+    fun playNormalVsComputer(view: View) {
         val intent = Intent(MyApplication.appContext, DifficultySelection::class.java).apply {
             putExtra(EXTRA_GAMETYPE, "normal")
-            putExtra(EXTRA_OPPONENT, "cpu")
         }
         startActivity(intent)
     }

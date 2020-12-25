@@ -1,4 +1,4 @@
-package Julian.viergewinnt
+package julian.viergewinnt
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

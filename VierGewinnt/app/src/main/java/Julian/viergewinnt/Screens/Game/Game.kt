@@ -1,58 +1,75 @@
-package Julian.viergewinnt.Screens.Game
+package julian.viergewinnt.screens.game
 
-import Julian.viergewinnt.EXTRA_GAMETYPE
-import Julian.viergewinnt.EXTRA_OPPONENT
-import Julian.viergewinnt.MyApplication
-import Julian.viergewinnt.R
-import Julian.viergewinnt.Screens.EXTRA_Difficulty
-import Julian.viergewinnt.Screens.Game.CPULogic.AI
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import julian.viergewinnt.EXTRA_GAMETYPE
+import julian.viergewinnt.EXTRA_OPPONENT
+import julian.viergewinnt.MyApplication
+import julian.viergewinnt.R
+import julian.viergewinnt.databinding.ActivityGameBinding
+import julian.viergewinnt.screens.EXTRA_CPU_LEVEL
 import kotlinx.android.synthetic.main.activity_game.*
+
 
 
 class Game : AppCompatActivity() {
 
-    var scoreP1 = 0
-    var scoreP2 = 0
-    var activePlayer = 2 // 1 = Player1 ; 2 = Player2
-    var startingPlayer = 2
-    lateinit var board: Array<Array<Pair<Button, Int>>>
-    var gameFinished = false
-    lateinit var difficulty: String
-    lateinit var gameType: String
-    var vsCPU = false
+    lateinit var board: Array<Array<Button>>
     val animation: Animation = AnimationUtils.loadAnimation(MyApplication.appContext, R.anim.blink)
-    val handler = Handler()
+    private lateinit var viewModel: GameViewModel
+    private lateinit var binding: ActivityGameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        // Inflate view and obtain an instance of the binding class
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_game)
+        binding.lifecycleOwner = this
 
-        gameType = intent.getStringExtra(EXTRA_GAMETYPE)!!
-        var opponent = intent.getStringExtra(EXTRA_OPPONENT)
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        binding.gameViewModel = viewModel
 
-        if ("cpu" == opponent) {
-            vsCPU = true
-            p2_text.text = "CPU"
-            difficulty = intent.getStringExtra(EXTRA_Difficulty)!!
-            Toast.makeText(MyApplication.appContext, "You vs CPU", Toast.LENGTH_SHORT).show()
+        val gameFinishedObserver = Observer<Boolean> { gameFinished ->
+            if (gameFinished) { gameFinished() }
+        }
+        viewModel.gameFinished.observe(this, gameFinishedObserver)
+
+        val activePlayerAnimationObserver = Observer<Int> { activePlayer ->
+            if (activePlayer == 1) {
+                activatePlayerInput()
+                p1_layout.startAnimation(animation)
+                p2_layout.clearAnimation()
+            } else {
+                if (viewModel.vsCPU) { deactivatePlayerInput() }
+                p2_layout.startAnimation(animation)
+                p1_layout.clearAnimation()
+            }
+            updateBoard()
+        }
+        viewModel.activePlayer.observe(this, activePlayerAnimationObserver)
+
+        viewModel.gameType = intent.getStringExtra(EXTRA_GAMETYPE)!!
+        viewModel.opponent = intent.getStringExtra(EXTRA_OPPONENT)!!
+        if ("cpu" == viewModel.opponent) {
+            viewModel.cpuLevel = intent.getStringExtra(EXTRA_CPU_LEVEL)!!
         } else {
-            Toast.makeText(MyApplication.appContext, "Player 1 vs Player 2", Toast.LENGTH_SHORT).show()
+            viewModel.cpuLevel = "no cpu"
         }
 
         initiateBoard()
+        viewModel.startingInfo()
 
     }
 
-    fun turn(view: View) {
+    fun startTurn(view: View) {
         val col = when (view) {
             col1_layout -> 0
             col2_layout -> 1
@@ -62,72 +79,7 @@ class Game : AppCompatActivity() {
             col6_layout -> 5
             else -> 6
         }
-
-        if (gameFinished) {
-            gameFinished = false
-            initiateBoard()
-            return
-        }
-
-        if (GameState.isValidMove(board, col)) {
-            val row = GameState.rowOfDeepestField(board, col)
-            activateField(row, col)
-
-            // Check for WIN
-            if (GameState.isWIN(board, activePlayer)) {
-                if (activePlayer == 1) {
-                    scoreP1++
-                    p1_score_text.setText(scoreP1.toString())
-                } else {
-                    scoreP2++
-                    p2_score_text.setText(scoreP2.toString())
-                }
-                Toast.makeText(
-                    MyApplication.appContext,
-                    "Player " + activePlayer.toString() + "wins!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                gameFinished()
-            }
-
-            //  Check for DRAW
-            if (GameState.isDraw(board)) {
-                Toast.makeText(MyApplication.appContext, "DRAW", Toast.LENGTH_SHORT).show()
-                gameFinished()
-            }
-
-            nextPlayerOnTurn()
-        } else {
-            Toast.makeText(MyApplication.appContext, "Column is full!", Toast.LENGTH_SHORT).show()
-        }
-
-
-    }
-
-    private fun gameFinished() {
-        gameFinished = true
-        p1_layout.clearAnimation()
-        p2_layout.clearAnimation()
-    }
-
-    private fun nextPlayerOnTurn() {
-        if (!(gameFinished)) {
-            if (activePlayer == 1) {
-                activePlayer = 2
-                p1_layout.clearAnimation()
-                p2_layout.startAnimation(animation)
-                if (vsCPU) { // perform cpu turn
-                    deactivatePlayerInput() // Player can not perform a turn until cpu has finished its turn
-                    handler.postDelayed({
-                        performCpuTurn(board)
-                    }, 1000)
-                }
-            } else {
-                activePlayer = 1
-                p2_layout.clearAnimation()
-                p1_layout.startAnimation(animation)
-            }
-        }
+        viewModel.conductTurn(col)
     }
 
     private fun deactivatePlayerInput() {
@@ -150,129 +102,99 @@ class Game : AppCompatActivity() {
         col7_layout.isClickable = true
     }
 
-    private fun performCpuTurn(board: Array<Array<Pair<Button, Int>>>) {
-        val column = AI.cpuTurn(board, difficulty)
-        if (column == -1) {
-            performRetardTurn(board)
-        } else {
-            var colView = getColumn(column)
-            turn(colView)
-            activatePlayerInput()
-        }
+    private fun gameFinished() {
+        p1_layout.clearAnimation()
+        p2_layout.clearAnimation()
+        updateBoard()
+        activatePlayerInput() // enables the touch for a restart
     }
 
-    private fun performRetardTurn(board: Array<Array<Pair<Button, Int>>>) {
-        var randomColumn = (0..6).random()
-        while (!(GameState.isValidMove(board, randomColumn))) {
-            randomColumn = (0..6).random()
-        }
-        var colView = getColumn(randomColumn)
-        turn(colView)
-        activatePlayerInput()
-    }
-
-    private fun activateField(col: Int, row: Int) {
-        this.board[col][row] = this.board[col][row].copy(second = activePlayer)
-        var button = board[col][row].first
-
-        if (activePlayer == 1) {
-            button.setBackgroundResource(R.drawable.red_field)
-        } else {
-            button.setBackgroundResource(R.drawable.blue_field)
-        }
-    }
-
-    // Who´se turn?
     private fun initiateBoard() {
-        val row1 = arrayOf<Pair<Button, Int>>(
-            Pair(field_00, 0),
-            Pair(field_01, 0),
-            Pair(field_02, 0),
-            Pair(field_03, 0),
-            Pair(field_04, 0),
-            Pair(field_05, 0),
-            Pair(field_06, 0)
+        val row1 = arrayOf<Button>(
+            field_00,
+            field_01,
+            field_02,
+            field_03,
+            field_04,
+            field_05,
+            field_06
         )
-        val row2 = arrayOf<Pair<Button, Int>>(
-            Pair(field_10, 0),
-            Pair(field_11, 0),
-            Pair(field_12, 0),
-            Pair(field_13, 0),
-            Pair(field_14, 0),
-            Pair(field_15, 0),
-            Pair(field_16, 0)
+        val row2 = arrayOf<Button>(
+            field_10,
+            field_11,
+            field_12,
+            field_13,
+            field_14,
+            field_15,
+            field_16
         )
-        val row3 = arrayOf<Pair<Button, Int>>(
-            Pair(field_20, 0),
-            Pair(field_21, 0),
-            Pair(field_22, 0),
-            Pair(field_23, 0),
-            Pair(field_24, 0),
-            Pair(field_25, 0),
-            Pair(field_26, 0),
+        val row3 = arrayOf<Button>(
+            field_20,
+            field_21,
+            field_22,
+            field_23,
+            field_24,
+            field_25,
+            field_26
         )
-        val row4 = arrayOf<Pair<Button, Int>>(
-            Pair(field_30, 0),
-            Pair(field_31, 0),
-            Pair(field_32, 0),
-            Pair(field_33, 0),
-            Pair(field_34, 0),
-            Pair(field_35, 0),
-            Pair(field_36, 0),
+        val row4 = arrayOf<Button>(
+            field_30,
+            field_31,
+            field_32,
+            field_33,
+            field_34,
+            field_35,
+            field_36
         )
-        val row5 = arrayOf<Pair<Button, Int>>(
-            Pair(field_40, 0),
-            Pair(field_41, 0),
-            Pair(field_42, 0),
-            Pair(field_43, 0),
-            Pair(field_44, 0),
-            Pair(field_45, 0),
-            Pair(field_46, 0),
+        val row5 = arrayOf<Button>(
+            field_40,
+            field_41,
+            field_42,
+            field_43,
+            field_44,
+            field_45,
+            field_46
         )
-        val row6 = arrayOf<Pair<Button, Int>>(
-            Pair(field_50, 0),
-            Pair(field_51, 0),
-            Pair(field_52, 0),
-            Pair(field_53, 0),
-            Pair(field_54, 0),
-            Pair(field_55, 0),
-            Pair(field_56, 0),
+        val row6 = arrayOf<Button>(
+            field_50,
+            field_51,
+            field_52,
+            field_53,
+            field_54,
+            field_55,
+            field_56
         )
-        board = arrayOf<Array<Pair<Button, Int>>>(row1, row2, row3, row4, row5, row6)
+        board = arrayOf<Array<Button>>(row1, row2, row3, row4, row5, row6)
         for (r in 0..5) {
             for (c in 0..6) {
-                board[r][c].first.setBackgroundResource(R.drawable.empty_field)
+                val color = viewModel.board.value!![r][c]
+                paintField(color, r, c)
             }
         }
-        if (startingPlayer == 1) {
-            activePlayer = 2
-            startingPlayer = 2
-            if (vsCPU) {
-                handler.postDelayed({
-                    performRetardTurn(board)
-                }, 500)
-            }
-        } else {
-            activePlayer = 1
-            startingPlayer = 1
-        }
-        if (activePlayer == 1) {
+
+        // Active Player Animation
+        if (viewModel.activePlayer.value == 1) {
             p1_layout.startAnimation(animation)
         } else {
             p2_layout.startAnimation(animation)
         }
     }
 
-    private fun getColumn(column: Int): View {
-        var colView = when (column) {
-            0 -> col1_layout
-            1 -> col2_layout
-            2 -> col3_layout
-            3 -> col4_layout
-            4 -> col5_layout
-            5 -> col6_layout
-            else -> col7_layout
+    private fun updateBoard() {
+        for (row in 0..5) {
+            for (col in 0..6) {
+                val color = viewModel.board.value!![row][col]
+                paintField(color, row, col)
+            }
         }
-        return colView
+    }
+
+    private fun paintField(color: Int, row: Int, col: Int) {
+        val drawable = when (color) {
+            0 -> R.drawable.empty_field
+            1 -> R.drawable.red_field
+            else -> R.drawable.blue_field
+        }
+        board[row][col].setBackgroundResource(drawable)
     }
 }

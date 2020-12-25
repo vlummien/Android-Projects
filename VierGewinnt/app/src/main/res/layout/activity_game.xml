@@ -1,545 +1,558 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".Screens.Game.Game"
-    tools:deviceIds="wear">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/p1_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="#FF4E4E"
-        app:layout_constraintEnd_toStartOf="@+id/game_layout"
-        app:layout_constraintStart_toEndOf="@+id/p2_layout"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/p1_score_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="@dimen/field_textSize"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/p1_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="P1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="gameViewModel"
+            type="julian.viergewinnt.screens.game.GameViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/game_layout"
-        android:layout_width="400sp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4CAF50"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/p1_layout"
-        app:layout_constraintStart_toStartOf="parent">
+        android:background="@android:color/white"
+        android:padding="@dimen/box_inset_layout_padding"
+        tools:context=".screens.game.Game">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/p1_layout"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:background="#FF4E4E"
+            app:layout_constraintEnd_toStartOf="@+id/game_layout"
+            app:layout_constraintStart_toEndOf="@+id/p2_layout"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/p1_score_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{gameViewModel.scoreP1.toString()}"
+                android:textSize="@dimen/field_textSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0"/>
+
+            <TextView
+                android:id="@+id/p1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{gameViewModel.p1Name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/game_layout"
+            android:layout_width="400sp"
+            android:layout_height="match_parent"
+            android:background="#4CAF50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/p1_layout"
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
-                android:id="@+id/col1_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="turn"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/field_50"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:id="@+id/col1_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/field_40"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    <Button
+                        android:id="@+id/field_50"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
 
-                <Button
-                    android:id="@+id/field_30"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    <Button
+                        android:id="@+id/field_40"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
 
-                <Button
-                    android:id="@+id/field_20"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    <Button
+                        android:id="@+id/field_30"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
 
-                <Button
-                    android:id="@+id/field_10"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    <Button
+                        android:id="@+id/field_20"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
 
-                <Button
-                    android:id="@+id/field_00"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    <Button
+                        android:id="@+id/field_10"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_00"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col2_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_51"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_41"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_31"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_21"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_11"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_01"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col3_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_52"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_42"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_32"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_22"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_12"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_02"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col4_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_53"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_43"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_33"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_23"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_13"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_03"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col5_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_54"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_44"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_34"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_24"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_14"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_04"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col6_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_55"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_45"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_35"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_25"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_15"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_05"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/col7_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="startTurn"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/field_56"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_46"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_36"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_26"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_16"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+
+                    <Button
+                        android:id="@+id/field_06"
+                        style="@style/EmptyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:textSize="@dimen/field_textSize" />
+                </LinearLayout>
+
             </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/col2_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/p2_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="#146AFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/game_layout"
+            tools:layout_editor_absoluteY="16dp">
+
+            <TextView
+                android:id="@+id/p2_text"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{gameViewModel.p2Name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="P2"/>
 
-                <Button
-                    android:id="@+id/field_51"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_41"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_31"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_21"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_11"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_01"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col3_layout"
+            <TextView
+                android:id="@+id/p2_score_text"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:text="@{gameViewModel.scoreP2.toString()}"
+                android:textSize="@dimen/field_textSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0"/>
 
-                <Button
-                    android:id="@+id/field_52"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/field_42"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_32"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_22"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_12"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_02"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col4_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/field_53"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_43"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_33"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_23"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_13"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_03"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col5_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/field_54"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_44"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_34"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_24"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_14"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_04"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col6_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/field_55"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_45"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_35"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_25"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_15"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_05"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col7_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="turn"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/field_56"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_46"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_36"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_26"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_16"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-
-                <Button
-                    android:id="@+id/field_06"
-                    style="@style/EmptyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:textSize="@dimen/field_textSize" />
-            </LinearLayout>
-
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/p2_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="#146AFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/game_layout"
-        tools:layout_editor_absoluteY="16dp">
-
-        <TextView
-            android:id="@+id/p2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="P2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/p2_score_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="@dimen/field_textSize"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

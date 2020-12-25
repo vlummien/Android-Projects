@@ -1,4 +1,4 @@
-package Julian.viergewinnt
+package julian.viergewinnt
 
 import android.app.Application
 import android.content.Context
